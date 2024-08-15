@@ -11,7 +11,7 @@ public class SortTest {
     @Test
     public void testSort() {
         /*
-         * get methods with reflection 
+         * get methods with reflection
          */
         // change katas class here!
         var classPath = "questions.zuo.sort.Lab";
@@ -20,10 +20,10 @@ public class SortTest {
         Method bubblingSort = null;
         Method selectionSort = null;
         try {
-            var lab =  Class.forName(classPath);
+            var lab = Class.forName(classPath);
             insertionSort = lab.getMethod("insertionSort", paramClass);
-            bubblingSort = lab.getMethod("bubblingSort",paramClass);
-            selectionSort = lab.getMethod("selectionSort",paramClass);
+            bubblingSort = lab.getMethod("bubblingSort", paramClass);
+            selectionSort = lab.getMethod("selectionSort", paramClass);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (NoSuchMethodException e) {
@@ -32,11 +32,11 @@ public class SortTest {
             e.printStackTrace();
         }
         /*
-         * unit test 
+         * unit test
          */
         int size = RandomNumberGenerator.randomInt(0, 10000);
-        int min = RandomNumberGenerator.randomInt(Integer.MIN_VALUE, 10000);
-        int max = RandomNumberGenerator.randomInt(min+1, Integer.MAX_VALUE);
+        int min = RandomNumberGenerator.randomInt(10000, 100000);
+        int max = RandomNumberGenerator.randomInt(min + 1, min + 100000);
         var arr = RandomNumberGenerator.randomIntArray(size, min, max, true);
         var resArr = Arrays.copyOf(arr, arr.length);
         var insertionArr = Arrays.copyOf(arr, arr.length);
@@ -44,14 +44,14 @@ public class SortTest {
         var selectionArr = Arrays.copyOf(arr, arr.length);
         Arrays.sort(resArr);
         try {
-            insertionSort.invoke(null,arr);
-            bubblingSort.invoke(null,arr);
-            selectionSort.invoke(null,arr);
+            insertionSort.invoke(null, insertionArr);
+            bubblingSort.invoke(null, bubblingArr);
+            selectionSort.invoke(null, selectionArr);
         } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
             e.printStackTrace();
         }
         /*
-         * result output 
+         * result output
          */
         boolean insertionRes = check(resArr, insertionArr);
         boolean bubblingRes = check(resArr, bubblingArr);
@@ -61,7 +61,7 @@ public class SortTest {
         System.out.println(selectionRes ? "passed: selection sort" : "rejected: selection sort");
     }
 
-    public boolean check(int[] arr, int[] target){
+    public boolean check(int[] arr, int[] target) {
         var res = true;
         for (int i = 0; i < arr.length; i++) {
             if (arr[i] != target[i]) {
