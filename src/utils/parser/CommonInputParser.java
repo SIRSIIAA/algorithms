@@ -5,7 +5,7 @@ import utils.Const;
 public class CommonInputParser {
     /*
      * the input string must like "[1,2,3,4,5]"
-     * all elments must be a legal integer
+     * all elements must be a legal integer
      */
     public static int[] parseIntArrayFromString(String inPut) {
         if (inPut == null || inPut.isEmpty()) {

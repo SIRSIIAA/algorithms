@@ -8,7 +8,7 @@ import static utils.generator.RandomNumberGenerator.randomIntArray;
 
 public class RandomNumberGeneratorTest {
     @Test
-    public void randomInteArrayTest() {
+    public void randomIntArrayTest() {
         var arr = randomIntArray(300, -100, 100, true);
         /*
          * only applicable to positive number

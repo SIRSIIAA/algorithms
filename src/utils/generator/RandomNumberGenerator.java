@@ -15,7 +15,7 @@ public class RandomNumberGenerator {
         int[] res = new int[size];
         var set = new HashSet<Integer>(size);
         for (int i = 0; i < res.length; i++) {
-            int t = randomInt(min, max);
+            int t;
             do {
                 t = randomInt(min, max);
             } while (!duplicate && set.contains(t));

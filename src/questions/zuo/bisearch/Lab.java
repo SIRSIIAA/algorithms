@@ -41,7 +41,7 @@ public class Lab {
     }
 
     /*
-     * find the last number <= target in an sorted array
+     * find the last number <= target in a sorted array
      */
     public static int findTheRight(int[] arr, int target) {
         int left = 0;
