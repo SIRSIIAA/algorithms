@@ -27,5 +27,8 @@ bin/
 ### VS Code ###
 .vscode/
 
+### fleet ###
+.fleet
+
 ### Mac OS ###
 .DS_Store
