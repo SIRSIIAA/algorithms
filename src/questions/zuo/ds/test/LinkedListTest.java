@@ -6,7 +6,7 @@ import utils.parser.CommonInputParser;
 
 public class LinkedListTest {
     @Test
-    public void testLinkedList(){
+    public void testLinkedList() {
         var str = "[1]";
         var arrays = CommonInputParser.parseIntArrayFromString(str);
         var list = new LinkedList();

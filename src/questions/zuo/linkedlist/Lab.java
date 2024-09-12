@@ -1,6 +1,5 @@
 package questions.zuo.linkedlist;
 
-import questions.zuo.ds.LinkedList;
 import questions.zuo.ds.LinkedNode;
 import utils.parser.CommonInputParser;
 
@@ -62,7 +61,7 @@ public class Lab {
         int carriage = 0;
         for (int sum, val = 0; head1 != null || head2 != null;
              head1 = (head1 == null) ? null : head1.next,
-                     head2 = (head2 == null) ? null : head2.next) {
+                 head2 = (head2 == null) ? null : head2.next) {
             val = (head1 == null ? 0 : head1.data) + (head2 == null ? 0 : head2.data);
             sum = (val + carriage) % 10;
             carriage = (val + carriage) / 10;
@@ -108,7 +107,7 @@ public class Lab {
         String input1 = "[2,4,3]";
         String input2 = "[5,6,4]";
         System.out.println(getSum(CommonInputParser.parseLinkedListFromString(input1),
-                CommonInputParser.parseLinkedListFromString(input2)));
+            CommonInputParser.parseLinkedListFromString(input2)));
         /*
          * division test
          */

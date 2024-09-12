@@ -10,7 +10,7 @@ public class EasyLinkedQueue {
         return queue.size();
     }
 
-    public boolean isEmpty(){
+    public boolean isEmpty() {
         return queue.isEmpty();
     }
 

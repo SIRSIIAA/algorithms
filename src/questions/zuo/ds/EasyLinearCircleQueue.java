@@ -5,7 +5,7 @@ package questions.zuo.ds;
  */
 public class EasyLinearCircleQueue {
     private int[] queue;
-    private int capacity;
+    private final int capacity;
 
     private int size;
 
@@ -20,7 +20,7 @@ public class EasyLinearCircleQueue {
         this.capacity = capacity;
     }
 
-    public int size(){
+    public int size() {
         return size;
     }
 
@@ -28,11 +28,11 @@ public class EasyLinearCircleQueue {
         return size == 0;
     }
 
-    public void offer(int i){
-        if (this.isEmpty()){
+    public void offer(int i) {
+        if (this.isEmpty()) {
             this.queue = new int[capacity];
         }
-        if (size < capacity){
+        if (size < capacity) {
             int idx = getIdx(right);
             queue[idx] = i;
             right++;
@@ -40,19 +40,19 @@ public class EasyLinearCircleQueue {
         }
     }
 
-    public int poll(){
+    public int poll() {
         int idx = getIdx(left);
-        int res =  queue[idx];
+        int res = queue[idx];
         left++;
         size--;
         return res;
     }
 
-    public int peek(){
+    public int peek() {
         return queue[getIdx(left)];
     }
 
-    private int getIdx(int i){
+    private int getIdx(int i) {
         return i >= capacity ? i % capacity : i;
     }
 }

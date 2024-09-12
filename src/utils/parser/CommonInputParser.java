@@ -11,7 +11,7 @@ public class CommonInputParser {
     public static int[] parseIntArrayFromString(String inPut) {
         if (inPut == null || inPut.isEmpty()) {
             System.out.println(Const.INPUT_ERROR);
-            return new int[] {};
+            return new int[]{};
         }
         var strings = parseIntsString(inPut);
         int[] res = new int[strings.length];

@@ -18,7 +18,7 @@ public class EasyLinearQueue {
         this.capacity = capacity;
     }
 
-    public int size(){
+    public int size() {
         return right - left;
     }
 
@@ -26,18 +26,18 @@ public class EasyLinearQueue {
         return left == right;
     }
 
-    public void offer(int i){
-        if (this.isEmpty()){
+    public void offer(int i) {
+        if (this.isEmpty()) {
             this.queue = new int[capacity];
         }
         queue[right++] = i;
     }
 
-    public int poll(){
+    public int poll() {
         return queue[left++];
     }
 
-    public int peek(){
+    public int peek() {
         return queue[left];
     }
 }
