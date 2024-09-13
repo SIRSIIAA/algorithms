@@ -14,18 +14,22 @@ public class LinkedList {
 
     public void addLast(int i) {
         if (head == null) {
-            head = new LinkedNode(i);
-            tail = head;
+            initHead(i);
         } else {
             tail.next = new LinkedNode(i, null, tail);
             tail = tail.next;
         }
     }
 
+    /**
+     * add an element after the head node
+     * head --> head.next
+     * -- after addition
+     * head --> new node --> head.next(origin)
+     */
     public void addFirst(int i) {
         if (head == null) {
-            head = new LinkedNode(i);
-            tail = head;
+            initHead(i);
         } else {
             var node = new LinkedNode(i, head.next, head);
             if (head.next != null) {
@@ -38,8 +42,51 @@ public class LinkedList {
         }
     }
 
+    public void addBeforeHead(int i) {
+        if (head == null) {
+            initHead(i);
+        } else {
+            var node = new LinkedNode(i, head, null);
+            head.prev = node;
+            head = node;
+        }
+    }
+
+    private void initHead(int i) {
+        head = new LinkedNode(i);
+        tail = head;
+    }
+
+    /**
+     * implement method of deque
+     * {@link java.util.LinkedList} implements interface {@link java.util.Deque}
+     */
+    public void removeTail() {
+        if (tail == null) {
+            return;
+        }
+        tail = tail.prev;
+        if (tail == null || tail.prev == null) {
+            return;
+        }
+        tail.next.prev = null;
+        tail.next = null;
+    }
+
+    public void removeHead() {
+        if (head == null) {
+            return;
+        }
+        head = head.next;
+        if (head == null || head.prev == null) {
+            return;
+        }
+        head.prev.next = null;
+        head.prev = null;
+    }
+
     @Override
     public String toString() {
-        return head.toString();
+        return head == null ? "[]" : head.toString();
     }
 }
