@@ -106,9 +106,85 @@ public class Lab {
     }
 
     /*
+     * merge sort with recursion
+     */
+    public static void mergeSort(int[] arr) {
+        recursion(arr, 0, arr.length - 1);
+    }
+
+    private static void recursion(int[] arr, int left, int right) {
+        if (left == right) {
+            return;
+        }
+        var mid = left + ((right - left) >> 1);
+        recursion(arr, left, mid);
+        recursion(arr, mid + 1, right);
+        merge(left, mid, right, arr);
+    }
+
+    /*
+     * mergeSort without recursion implementation
+     */
+    public static void mergeSortNoRecursion(int[] arr) {
+        noRecursion(arr);
+    }
+
+    private static void noRecursion(int[] arr) {
+        var left = 0;
+        var limit = arr.length - 1;
+        var l = left;
+        /*
+         * select a step, double it each time
+         * the step contains a half group
+         * logN
+         */
+        for (int step = 1; step < arr.length; step <<= 1) {
+            /*
+             * merge the elements by group with current step size
+             */
+            while (l < arr.length) {
+                var mid = l + step - 1;
+                /*
+                 * the limit group does not exist
+                 */
+                if (mid > limit) {
+                    break;
+                }
+                var r = Math.min((l + (step << 1)) - 1, limit);
+                merge(l, mid, r, arr);
+                l = r + 1;
+            }
+            /*
+             * set l to 0 manually
+             */
+            l = left;
+        }
+    }
+
+    private static void merge(int left, int mid, int right, int[] arr) {
+        var lp = left;
+        var rp = mid + 1;
+        var heap = new int[right - left + 1];
+        var hp = 0;
+        while (lp <= mid && rp <= right) {
+            /*
+             * get the left one when equals
+             */
+            heap[hp++] = arr[lp] <= arr[rp] ? arr[lp++] : arr[rp++];
+        }
+        while (lp <= mid) {
+            heap[hp++] = arr[lp++];
+        }
+        while (rp <= right) {
+            heap[hp++] = arr[rp++];
+        }
+        System.arraycopy(heap, 0, arr, left, heap.length);
+    }
+
+    /*
      * inspect common input
      */
     public static boolean isLegal(int[] arr) {
-        return (arr == null || arr.length < 2) ? false : true;
+        return arr != null && arr.length >= 2;
     }
 }

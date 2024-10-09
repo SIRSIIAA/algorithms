@@ -22,19 +22,13 @@ public class EasyDeque {
         deque = new int[capacity];
     }
 
-    private void offerEmpty(int i) {
-        if (size == 0) {
-            deque[left] = i;
-            size++;
-        }
-    }
-
     public void offerHead(int i) {
         if (deque == null) {
             init();
         }
-        if (isEmpty()) {
-            offerEmpty(i);
+        if (size == 0) {
+            deque[left] = i;
+            size++;
             return;
         }
         if (size < capacity) {
@@ -52,9 +46,9 @@ public class EasyDeque {
         if (deque == null) {
             init();
         }
-        if (isEmpty()) {
-            offerEmpty(i);
-            return;
+        if (size == 0) {
+            deque[left] = i;
+            size++;
         }
         if (size < capacity) {
             if (right == capacity - 1) {

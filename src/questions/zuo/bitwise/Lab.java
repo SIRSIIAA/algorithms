@@ -1,5 +1,8 @@
 package questions.zuo.bitwise;
 
+/*
+ * bitwise in Java
+ */
 public class Lab {
     public static void main(String[] args) {
         /*
