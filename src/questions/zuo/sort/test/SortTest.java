@@ -22,6 +22,8 @@ public class SortTest {
         Method selectionSort = null;
         Method mergeSort = null;
         Method mergeSortNoRecursion = null;
+        Method trRandomQuickSort = null;
+        Method heapSort1 = null;
         try {
             var lab = Class.forName(classPath);
             insertionSort = lab.getMethod("insertionSort", paramClass);
@@ -29,6 +31,8 @@ public class SortTest {
             selectionSort = lab.getMethod("selectionSort", paramClass);
             mergeSort = lab.getMethod("mergeSort", paramClass);
             mergeSortNoRecursion = lab.getMethod("mergeSortNoRecursion", paramClass);
+            trRandomQuickSort = lab.getMethod("traditionalRandomQuickSort", paramClass);
+            heapSort1 = lab.getMethod("heapSort1", paramClass);
         } catch (ClassNotFoundException | NoSuchMethodException | SecurityException e) {
             e.printStackTrace();
         }
@@ -45,6 +49,9 @@ public class SortTest {
         var selectionArr = Arrays.copyOf(arr, arr.length);
         var mergeArr0 = Arrays.copyOf(arr, arr.length);
         var mergeArr1 = Arrays.copyOf(arr, arr.length);
+        var quickArr0 = Arrays.copyOf(arr, arr.length);
+        var quickArr1 = Arrays.copyOf(arr, arr.length);
+        var heapSortArr0 = Arrays.copyOf(arr, arr.length);
         Arrays.sort(resArr);
         try {
             assert insertionSort != null;
@@ -57,6 +64,10 @@ public class SortTest {
             mergeSort.invoke(null, mergeArr0);
             assert mergeSortNoRecursion != null;
             mergeSortNoRecursion.invoke(null, mergeArr1);
+            assert trRandomQuickSort != null;
+            trRandomQuickSort.invoke(null, quickArr0);
+            assert heapSort1 != null;
+            heapSort1.invoke(null, heapSortArr0);
         } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
             e.printStackTrace();
         }
@@ -68,11 +79,18 @@ public class SortTest {
         boolean selectionRes = check(resArr, selectionArr);
         boolean mergeSortRes = check(resArr, mergeArr0);
         boolean mergeSortNoRecursionRes = check(resArr, mergeArr1);
+        boolean trRandomQuickSortRes = check(resArr, quickArr0);
+        boolean heapSort1Res = check(resArr, heapSortArr0);
         System.out.println(insertionRes ? "passed: insertion sort" : "rejected: insertion sort");
         System.out.println(bubblingRes ? "passed: bubbling sort" : "rejected: bubbling sort");
         System.out.println(selectionRes ? "passed: selection sort" : "rejected: selection sort");
         System.out.println(mergeSortRes ? "passed: merge sort" : "rejected: merge sort");
         System.out.println(mergeSortNoRecursionRes ? "passed: merge sort no recursion" : "rejected: merge sort no recursion sort");
+        System.out.println(heapSort1Res ? "passed: heap sort 1" : "rejected: heap sort 1");
+        /*
+         * quick sort will cause stack overflow …
+         */
+//        System.out.println(trRandomQuickSortRes ? "passed: traditional random quick sort" : "rejected: traditional random quick sort");
     }
 
     public boolean check(int[] arr, int[] target) {
@@ -93,10 +111,19 @@ public class SortTest {
     @Test
     public void testMergeNoRecusion() {
         var arr = new int[]{
-                2,3,4,5,1,8,7,9,0
+                2, 3, 4, 5, 1, 8, 7, 9, 0
         };
         printArray(arr);
         Lab.mergeSortNoRecursion(arr);
+        printArray(arr);
+    }
+
+    @Test
+    public void testQuickSort() {
+        var arr = new int[]{
+                5,3,6,2,4,3,5,6,7,2,9
+        };
+        Lab.optimizedRandomQuickSort(arr);
         printArray(arr);
     }
 }

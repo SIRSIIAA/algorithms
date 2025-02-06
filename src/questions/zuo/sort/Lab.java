@@ -1,5 +1,10 @@
 package questions.zuo.sort;
 
+import questions.zuo.ds.heap.EasyMaxHeap;
+import utils.generator.RandomNumberGenerator;
+
+import java.util.Random;
+
 public class Lab {
 
     /*
@@ -182,9 +187,96 @@ public class Lab {
     }
 
     /*
+     * random quick sort
+     */
+    public static void traditionalRandomQuickSort(int[] arr) {
+        traditionalRandomQuickSort(arr, 0, arr.length - 1);
+    }
+
+    private static void traditionalRandomQuickSort(int[] arr, int left, int right) {
+        if (left >= right) {
+            return;
+        }
+        int target = arr[RandomNumberGenerator.randomInt(left, right)];
+        int mid = tradtionalPartition(arr, target, left, right);
+        traditionalRandomQuickSort(arr, left, mid - 1);
+        traditionalRandomQuickSort(arr, mid + 1, right);
+    }
+
+    private static int tradtionalPartition(int[] arr, int target, int left, int right) {
+        var leftBound = left;
+        int i;
+        int marked = 0;
+        for (i = left; i <= right; i++) {
+            var cur = arr[i];
+            if (cur <= target) {
+                swap(arr, i, leftBound);
+                if (arr[leftBound] == target) {
+                    marked = leftBound;
+                }
+                leftBound++;
+            }
+        }
+        swap(arr, marked, leftBound - 1);
+        return leftBound - 1;
+    }
+
+    /*
+     * optimized random quick sort
+     */
+    public static void optimizedRandomQuickSort(int[] arr) {
+        optimizedRandomQuickSort(arr, 0, arr.length - 1);
+    }
+
+    private static void optimizedRandomQuickSort(int[] arr, int left, int right) {
+        if (left >= right) {
+            return;
+        }
+        var target = arr[RandomNumberGenerator.randomInt(left, right)];
+        var bounds = optimizedPartition(arr, target, left, right);
+        optimizedRandomQuickSort(arr, left, bounds[0] - 1);
+        optimizedRandomQuickSort(arr, bounds[1] + 1, right);
+    }
+
+    private static int[] optimizedPartition(int[] arr, int target, int left, int right) {
+        var leftBound = left;
+        var rightBound = right;
+        int i;
+        for (i = left; i <= rightBound; i++) {
+            var cur = arr[i];
+            if (cur < target) {
+                swap(arr, i, leftBound++);
+            } else if (cur > target) {
+                swap(arr, i--, rightBound--);
+            }
+        }
+        return new int[]{
+                leftBound, rightBound
+        };
+    }
+
+    /*
+     * heap sort m1
+     */
+    public static void heapSort1(int[] arr) {
+        System.arraycopy(new EasyMaxHeap(arr).heapSortSinceTop(),0,arr,0,arr.length);
+    }
+
+    /*
      * inspect common input
      */
     public static boolean isLegal(int[] arr) {
         return arr != null && arr.length >= 2;
+    }
+
+    /*
+     * random select
+     */
+    public static int randomSelect(int[] arr, int idx) {
+        return -1;
+    }
+
+    private static int[] randomSelectPartition(int[] arr, int target, int left, int right) {
+        return null;
     }
 }

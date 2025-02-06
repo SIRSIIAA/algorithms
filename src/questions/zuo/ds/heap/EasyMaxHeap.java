@@ -18,7 +18,7 @@ public class EasyMaxHeap extends EasyHeap {
         return Arrays.toString(data);
     }
 
-    public void heapSortSinceTop() {
+    public int[] heapSortSinceTop() {
         for (int datum : data) {
             heapInsert(datum);
         }
@@ -27,31 +27,34 @@ public class EasyMaxHeap extends EasyHeap {
             size--;
             heapify(0);
         }
+
+        return data;
     }
 
     public void heapInsert(int value) {
         data[size++] = value;
         var idx = size - 1;
-        while (data[idx] > data[idx >> 1]) {
-            swap(idx, idx >> 1);
-            idx = idx >> 1;
+        while (data[idx] > data[(idx - 1) / 2]) {
+            swap(idx, (idx - 1) / 2);
+            idx = (idx - 1) / 2;
         }
     }
 
     public void heapify(int idx) {
         var l = (idx << 1) + 1;
-        var r = (idx << 1) + 2;
         while (l < size) {
-            var bigger = ((r < size) && (data[l] > data[r])) ? l : r;
+            var r = (idx << 1) + 2;
+            var bigger = ((r < size) && (data[r] > data[l])) ? r : l;
             var max = data[bigger] > data[idx] ? bigger : idx;
             /*
              * must quit when necessary
              */
-            if (max == idx){
+            if (max == idx) {
                 break;
             }
             swap(idx, max);
-            l = (max << 1) + 1;
+            idx = max;
+            l = (idx << 1) + 1;
         }
     }
 
