@@ -3,6 +3,8 @@ package questions.zuo.ds.test;
 import org.junit.jupiter.api.Test;
 import questions.zuo.ds.heap.EasyMaxHeap;
 
+import java.util.Arrays;
+
 public class EasyHeapTest {
     @Test
     public void testEasyMaxHeap() {
@@ -13,5 +15,7 @@ public class EasyHeapTest {
                 4,1,2,0,-2
         };
         var heap = new EasyMaxHeap(arr1);
+        var res2 = heap.heapSortSinceBottom();
+        System.out.println(Arrays.toString(res2));
     }
 }

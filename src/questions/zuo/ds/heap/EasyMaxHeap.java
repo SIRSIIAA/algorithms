@@ -31,7 +31,19 @@ public class EasyMaxHeap extends EasyHeap {
         return data;
     }
 
-    public void heapInsert(int value) {
+    public int[] heapSortSinceBottom() {
+        for (int i = data.length - 1; i > -1; i--) {
+            heapify(i);
+        }
+        while (size > 1) {
+            swap(0, size - 1);
+            size--;
+            heapify(0);
+        }
+        return data;
+    }
+
+    private void heapInsert(int value) {
         data[size++] = value;
         var idx = size - 1;
         while (data[idx] > data[(idx - 1) / 2]) {
@@ -40,7 +52,7 @@ public class EasyMaxHeap extends EasyHeap {
         }
     }
 
-    public void heapify(int idx) {
+    private void heapify(int idx) {
         var l = (idx << 1) + 1;
         while (l < size) {
             var r = (idx << 1) + 2;

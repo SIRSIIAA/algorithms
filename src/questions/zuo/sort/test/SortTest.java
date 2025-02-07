@@ -24,6 +24,7 @@ public class SortTest {
         Method mergeSortNoRecursion = null;
         Method trRandomQuickSort = null;
         Method heapSort1 = null;
+        Method heapSort2 = null;
         try {
             var lab = Class.forName(classPath);
             insertionSort = lab.getMethod("insertionSort", paramClass);
@@ -33,6 +34,7 @@ public class SortTest {
             mergeSortNoRecursion = lab.getMethod("mergeSortNoRecursion", paramClass);
             trRandomQuickSort = lab.getMethod("traditionalRandomQuickSort", paramClass);
             heapSort1 = lab.getMethod("heapSort1", paramClass);
+            heapSort2 = lab.getMethod("heapSort2", paramClass);
         } catch (ClassNotFoundException | NoSuchMethodException | SecurityException e) {
             e.printStackTrace();
         }
@@ -52,6 +54,7 @@ public class SortTest {
         var quickArr0 = Arrays.copyOf(arr, arr.length);
         var quickArr1 = Arrays.copyOf(arr, arr.length);
         var heapSortArr0 = Arrays.copyOf(arr, arr.length);
+        var heapSortArr1 = Arrays.copyOf(arr, arr.length);
         Arrays.sort(resArr);
         try {
             assert insertionSort != null;
@@ -68,6 +71,8 @@ public class SortTest {
             trRandomQuickSort.invoke(null, quickArr0);
             assert heapSort1 != null;
             heapSort1.invoke(null, heapSortArr0);
+            assert heapSort2 != null;
+            heapSort2.invoke(null, heapSortArr1);
         } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
             e.printStackTrace();
         }
@@ -81,12 +86,14 @@ public class SortTest {
         boolean mergeSortNoRecursionRes = check(resArr, mergeArr1);
         boolean trRandomQuickSortRes = check(resArr, quickArr0);
         boolean heapSort1Res = check(resArr, heapSortArr0);
+        boolean heapSort2Res = check(resArr, heapSortArr1);
         System.out.println(insertionRes ? "passed: insertion sort" : "rejected: insertion sort");
         System.out.println(bubblingRes ? "passed: bubbling sort" : "rejected: bubbling sort");
         System.out.println(selectionRes ? "passed: selection sort" : "rejected: selection sort");
         System.out.println(mergeSortRes ? "passed: merge sort" : "rejected: merge sort");
         System.out.println(mergeSortNoRecursionRes ? "passed: merge sort no recursion" : "rejected: merge sort no recursion sort");
         System.out.println(heapSort1Res ? "passed: heap sort 1" : "rejected: heap sort 1");
+        System.out.println(heapSort2Res ? "passed: heap sort 2" : "rejected: heap sort 2");
         /*
          * quick sort will cause stack overflow …
          */

@@ -256,10 +256,17 @@ public class Lab {
     }
 
     /*
-     * heap sort m1
+     * heap sort m1 : construct the heap since top
      */
     public static void heapSort1(int[] arr) {
         System.arraycopy(new EasyMaxHeap(arr).heapSortSinceTop(),0,arr,0,arr.length);
+    }
+
+    /*
+     * heap sort m2 : construct the heap since bottom
+     */
+    public static void heapSort2(int[] arr) {
+        System.arraycopy(new EasyMaxHeap(arr).heapSortSinceBottom(),0,arr,0,arr.length);
     }
 
     /*
