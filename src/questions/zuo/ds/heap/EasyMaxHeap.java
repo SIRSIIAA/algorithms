@@ -32,6 +32,7 @@ public class EasyMaxHeap extends EasyHeap {
     }
 
     public int[] heapSortSinceBottom() {
+        size = data.length;
         for (int i = data.length - 1; i > -1; i--) {
             heapify(i);
         }
