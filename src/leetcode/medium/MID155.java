@@ -1,15 +1,16 @@
-package questions.zuo.ds;
+package leetcode.medium;
 
 import java.util.Stack;
 
 /*
- * imitate a stack with queue
+ * ref: https://leetcode.cn/problems/min-stack/description/
  */
-public class MinimumStack {
+public class MID155 {
+
     private Stack<Integer> data;
     private Stack<Integer> minimum;
 
-    public MinimumStack() {
+    public MID155() {
         data = new Stack<>();
         minimum = new Stack<>();
     }
